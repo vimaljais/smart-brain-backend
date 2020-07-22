@@ -12,15 +12,13 @@ const image= require('./controllers/image.js');
 const db = knex({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : '',
-    database : 'smart-brain'
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
   }
 });
 
-db.select('*').from('users').then(data => {
-});
 
 const app = express();
 const saltRounds=10;
